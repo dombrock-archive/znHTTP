@@ -8,6 +8,7 @@ const selfCheck = require('./local_modules/selfCheck');
 const parseFileName = require('./local_modules/parseFileName');
 const handleMIME = require('./local_modules/handleMIME');
 const show404 = require('./local_modules/show404');
+//load custom requests from a custom requests loader module that loads other modules (functions.js)
 //server constants
 const scriptName = path.basename(__filename);
 const error404 = fs.readFileSync('./404.html', 'utf8');
@@ -28,6 +29,7 @@ http.createServer(function (req, res) {
       return res.end();
     }  
     handleMIME.handle(res,req,filename,fs,path);
+    //HANDLE CUSTOM REQUESTS
     res.write(data);
     return res.end();
   });
