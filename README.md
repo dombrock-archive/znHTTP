@@ -4,4 +4,8 @@
  
 ```node zserv.js```
  
-**Binds to port 80 be default which probably means you need root**
+**NOTE:**Binds to port 80 by default which probably means you need root.
+ 
+The webroot is in ```/web/``` this is where you should place your html, images ect. 
+
+Not all MIME types are currently supported. See the supported MIME types in ```/local_modules/mtypes.js```
