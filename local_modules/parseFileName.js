@@ -1,6 +1,6 @@
 exports.parse = function parseFileName(req,qpath,path){
 //qpath should be q.pathname
-  var filename = "./web/" + qpath;
+  var filename = "./web" + qpath;
   //direct the root of directories to an index.html
   if(req.url.slice(-1)=="/"){
     filename +="index.html";
