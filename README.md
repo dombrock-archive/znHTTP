@@ -3,7 +3,7 @@
 ![screenshot](https://github.com/matdombrock/zserver/blob/master/web/screenshot.png?raw=true)
 ### Usage
  
-```node zserv.js```
+```node znHTTP.js```
  
 **NOTE:** Binds to port 80 by default which probably means you need root.
  
