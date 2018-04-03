@@ -1,5 +1,5 @@
-# zserver
-## A (very) minimal web server for Node
+# znHTTP
+## A (very) minimal HTTP web server using Node
 ![screenshot](https://github.com/matdombrock/zserver/blob/master/web/screenshot.png?raw=true)
 ### Usage
  
