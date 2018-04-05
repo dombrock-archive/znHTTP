@@ -6,7 +6,8 @@ exports.list = function(filename,res,fs){
 	    console.log(files[i]);
 	    res.write("<a href='"+files[i]+"'>"+files[i]+"</a></br>");
 	  }
-	  return res.end();
+	  res.end();
+	  return true;
 	}
-	return;
+	return false;
 };

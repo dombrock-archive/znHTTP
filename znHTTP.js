@@ -10,7 +10,7 @@ const handleMIME = require('./local_modules/handleMIME');
 const show404 = require('./local_modules/show404');
 const directory = require('./local_modules/directory');
 //load functions
-const cfuntions  = require('./custom/functions.js')
+const cfunctions  = require('./custom/functions.js')
 //server constants
 const scriptName = path.basename(__filename);
 const error404 = fs.readFileSync('./404.html', 'utf8');
@@ -22,19 +22,26 @@ http.createServer(function (req, res) {
   }
   //parse the url
   const q = url.parse(req.url, true);
-  const filename = parseFileName.parse(req,q.pathname,path,fs);
-  //list directory if applicable
-  directory.list(filename,res,fs);
   //serve the file
-  console.log("requested: "+filename);
-  fs.readFile(filename, function(err, data) {
-    if (err) {
-      show404.show(res,error404);
-      return res.end();
-    }  
-    handleMIME.handle(res,req,filename,fs,path);
-    cfuntions.functions(res,req,filename);
-    res.write(data);
+  const requestName = "./web" + q.pathname;
+  const cdata = cfunctions.functions(res,req,requestName,q);
+  if (cdata == undefined){
+    const filename = parseFileName.parse(req,q.pathname,path,fs);
+    console.log("requested: "+filename);
+    //list directory if applicable
+    if (directory.list(filename,res,fs)==false){
+      fs.readFile(filename, function(err, data) {
+        if (err) {
+          show404.show(res,error404);
+          return res.end();
+        }  
+        handleMIME.handle(res,req,filename,fs,path);
+        res.write(data);
+        return res.end();  
+      });
+    }
+  }else{
+    res.write(cdata);
     return res.end();
-  });
+  }
 }).listen(80);
